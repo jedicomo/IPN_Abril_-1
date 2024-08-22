@@ -18,19 +18,19 @@ module tt_um_shuangyu_top (
 
 
   // All output pins must be assigned. If not used, assign to 0.
-  // assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
+  // assign uo_out  = ui_in + uio_in;  // Example: uo_out is the sum of ui_in and uio_in
   // assign uio_out = 0;
   // assign uio_oe  = 0;
 
   wire [7:0] SevenSegment;  
-  assign ou_out[0] = SevenSegment[0];  //A
-  assign ou_out[1] = SevenSegment[1];  //B
-  assign ou_out[2] = SevenSegment[2];  //C
-  assign ou_out[3] = SevenSegment[3];  //D
-  assign ou_out[4] = SevenSegment[4];  //E
-  assign ou_out[5] = SevenSegment[5];  //F
-  assign ou_out[6] = SevenSegment[6];  //G
-  assign ou_out[7] = SevenSegment[7];  //dp
+  assign uo_out[0] = SevenSegment[0];  //A
+  assign uo_out[1] = SevenSegment[1];  //B
+  assign uo_out[2] = SevenSegment[2];  //C
+  assign uo_out[3] = SevenSegment[3];  //D
+  assign uo_out[4] = SevenSegment[4];  //E
+  assign uo_out[5] = SevenSegment[5];  //F
+  assign uo_out[6] = SevenSegment[6];  //G
+  assign uo_out[7] = SevenSegment[7];  //dp
 
   wire [3:0] Enable;
   assign uio_out[0] = Enable[0];
