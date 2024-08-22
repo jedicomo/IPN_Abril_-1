@@ -16,6 +16,15 @@ module tt_um_shuangyu_top (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+  calculator inst_calculator(
+      .clk(clk),
+      .rst_n(rst_n),
+      .IO_P4_ROW(ui_in[3:0]),
+      .IO_P4_COL(IO_P4_COL),
+      .Enable(Enable),
+      .SevenSegment(SevenSegment)
+  );
+
 
   // All output pins must be assigned. If not used, assign to 0.
   // assign uo_out  = ui_in + uio_in;  // Example: uo_out is the sum of ui_in and uio_in
@@ -48,14 +57,5 @@ module tt_um_shuangyu_top (
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, ui_in[7:4], 1'b0};
 
-  calculator inst_calculator(
-      .clk(clk),
-      .rst_n(rst_n),
-      .IO_P4_ROW(ui_in[3:0]),
-      .IO_P4_COL(IO_P4_COL),
-      .Enable(Enable),
-      .SevenSegment(SevenSegment)
-  );
 
-    
 endmodule
