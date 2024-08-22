@@ -136,7 +136,7 @@ keypad_encoder inst_keypad_encoder(
 	
 always @(posedge clk or negedge rst_n)
 begin
-   	if(!rst_n) begin
+	if(!rst_n) begin
 		state <= state_clear;
     	reg_error <= 1'b0;
   	end 
