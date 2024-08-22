@@ -48,7 +48,7 @@ module tt_um_shuangyu_top (
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, ui_in[7:4], 1'b0};
 
-  calculator_top inst_calculator_top(
+  calculator inst_calculator(
       .clk(clk),
       .rst_n(rst_n),
       .IO_P4_ROW(ui_in[3:0]),
