@@ -16,14 +16,6 @@ module tt_um_shuangyu_top (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  calculator inst_calculator(
-      .clk(clk),
-      .rst_n(rst_n),
-      .IO_P4_ROW(ui_in[3:0]),
-      .IO_P4_COL(IO_P4_COL),
-      .Enable(Enable),
-      .SevenSegment(SevenSegment)
-  );
 
 
   // // All output pins must be assigned. If not used, assign to 0.
@@ -52,13 +44,10 @@ module tt_um_shuangyu_top (
   assign uio_out[3] = Enable[3];
 
   wire [3:0] IO_P4_COL;
-  wire [3:0] IO_P4_COL;
   assign uio_out[5] = IO_P4_COL[0];
   assign uio_out[6] = IO_P4_COL[1];
   assign uio_out[7] = IO_P4_COL[2];
   assign uio_out[8] = IO_P4_COL[3];
- 
-  
   
 
   // calculator_top inst_calculator(
@@ -69,6 +58,7 @@ module tt_um_shuangyu_top (
   //     .Enable(Enable),
   //     .SevenSegment(SevenSegment)
   // );
+
 
 //calculator operator
 localparam [1:0]
