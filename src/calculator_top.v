@@ -14,15 +14,12 @@ TODO3. test rst_n signal (random initialization)
 */
 
 module calculator_top(
-    input clk,
-    input rst_n,
-
-    input [3:0] IO_P4_ROW,
-    output [3:0] IO_P4_COL,
-              
-    output reg [3:0] Enable,
-    output reg [7:0] SevenSegment  
-
+input clk,
+input rst_n,
+input [3:0] IO_P4_ROW,
+output [3:0] IO_P4_COL,
+output reg [3:0] Enable,
+output reg [7:0] SevenSegment  
     // input key_pressed,
     // input [24:0] keypad_out,
 );
@@ -31,26 +28,26 @@ module calculator_top(
 
 //calculator operator
 localparam [1:0]
-	OP_PLUS = 2'd0,
-	OP_MINUS = 2'd1,
-	OP_MULTIPLY = 2'd2,
-	OP_DIVIDE = 2'd3;
+  OP_PLUS = 2'd0,
+  OP_MINUS = 2'd1,
+  OP_MULTIPLY = 2'd2,
+  OP_DIVIDE = 2'd3;
 
 
 //calculator state
 reg [3:0] state; 
 localparam [3:0] 
-	state_clear = 4'd0,
-	state_read = 4'd1,
-	state_digit_pressed = 4'd2,
-    state_minus_pressed = 4'd3,
-    state_dp_pressed = 4'd4,
-    state_plus_pressed = 4'd5,
-    state_multiply_pressed = 4'd6,
-    state_divide_pressed = 4'd7,
-	state_calculate = 4'd8,
-	state_display_arg = 4'd9,
-	state_display_result = 4'd10;
+  state_clear = 4'd0,
+  state_read = 4'd1,
+  state_digit_pressed = 4'd2,
+  state_minus_pressed = 4'd3,
+  state_dp_pressed = 4'd4,
+  state_plus_pressed = 4'd5,
+  state_multiply_pressed = 4'd6,
+  state_divide_pressed = 4'd7,
+  state_calculate = 4'd8,
+  state_display_arg = 4'd9,
+  state_display_result = 4'd10;
 
 
 reg [2:0] reg_digits_counter;  
@@ -136,61 +133,58 @@ keypad_encoder inst_keypad_encoder(
 );
 
 
+	
 always @(posedge clk or negedge rst_n)
 begin
-	if(!rst_n) begin
-		state <= state_clear;
-        reg_error <= 1'b0;
-	end 
-	else begin
-		case(state)
-
-			state_clear:
-				begin
-                    reg_digits_counter <= 0; 
-                    reg_decimal_place_counter <= 3'd1;  //initial to be 1
-                    reg_sign <= OP_PLUS;
-                    reg_dp <= 0;
-                    //reg_error <= 0;
-                    reg_operator <= OP_PLUS;
-                    reg_operator_next <= OP_PLUS;
-					reg_arg <= 0;
-                    reg_result <= 0;
-                    reg_display <= 0;
-                    key_pressed_prev <=0;  
-					// clear -> read
-					state <= state_read;
-				end
-
-			state_read:
-				begin
-                    // check if new key come in
-                    if(key_pressed && !key_pressed_prev) begin
-                        reg_error <= 1'b0;  //!
-						if(keypad_out < 4'hA) begin
-                            state <= state_digit_pressed;
-                        end
-                        else if(keypad_out == 4'hA) begin
-						    state <= state_plus_pressed;
-                        end
-                        else if(keypad_out == 4'hB) begin
-						     state <= state_minus_pressed;
-                        end
-                        else if(keypad_out == 4'hC) begin
-						    state <= state_multiply_pressed;
-                        end
-                        else if(keypad_out == 4'hD) begin
-						    state <= state_divide_pressed;
-                        end
-                        else if(keypad_out == 4'hF) begin
-                            state <= state_dp_pressed;
-                        end
-                        else if(keypad_out == 4'hE) begin
-                            state <= state_clear;
-                        end
-                    end
-                    key_pressed_prev <= key_pressed;
-				end
+  if(!rst_n) begin
+    state <= state_clear;
+    reg_error <= 1'b0;
+  end 
+  else begin
+    case(state)
+      state_clear: begin
+      	reg_digits_counter <= 0; 
+      	reg_decimal_place_counter <= 3'd1;  //initial to be 1
+      	reg_sign <= OP_PLUS;
+      	reg_dp <= 0;
+      	//reg_error <= 0;
+      	reg_operator <= OP_PLUS;
+      	reg_operator_next <= OP_PLUS;
+      	reg_arg <= 0;
+      	reg_result <= 0;
+      	reg_display <= 0;
+      	key_pressed_prev <=0;  
+      	// clear -> read
+      	state <= state_read;
+      end
+      state_read: begin
+        // check if new key come in
+        if(key_pressed && !key_pressed_prev) begin
+          reg_error <= 1'b0;  //!
+	  if(keypad_out < 4'hA) begin
+            state <= state_digit_pressed;
+          end
+          else if(keypad_out == 4'hA) begin
+	    state <= state_plus_pressed;
+          end
+          else if(keypad_out == 4'hB) begin
+	    state <= state_minus_pressed;
+          end
+          else if(keypad_out == 4'hC) begin
+	    state <= state_multiply_pressed;
+          end
+          else if(keypad_out == 4'hD) begin
+	    state <= state_divide_pressed;
+          end
+          else if(keypad_out == 4'hF) begin
+            state <= state_dp_pressed;
+          end
+          else if(keypad_out == 4'hE) begin
+             state <= state_clear;
+          end
+        end
+        key_pressed_prev <= key_pressed;
+      end
 
 			state_digit_pressed:
 				begin
