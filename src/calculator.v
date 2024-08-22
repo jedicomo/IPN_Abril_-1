@@ -13,7 +13,7 @@ TODO2. input components add to top module
 TODO3. test rst_n signal (random initialization)
 */
 
-module calculator_top(
+module calculator(
 input clk,
 input rst_n,
 input [3:0] IO_P4_ROW,
