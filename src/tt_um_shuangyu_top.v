@@ -38,12 +38,12 @@ module tt_um_shuangyu_top (
   assign uio_out[2] = Enable[2];
   assign uio_out[3] = Enable[3];
 
-  wire [4:0] IO_P4_COL;
+  wire [3:0] IO_P4_COL;
   assign uio_out[5] = IO_P4_COL[0];
   assign uio_out[6] = IO_P4_COL[1];
   assign uio_out[7] = IO_P4_COL[2];
   assign uio_out[8] = IO_P4_COL[3];
- 
+
     
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, ui_in[7:4], 1'b0};
