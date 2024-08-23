@@ -51,10 +51,10 @@ module tt_um_shuangyu_top (
   assign uio_out[3] = Enable[3];
 
   wire [3:0] IO_P4_COL;
-  assign uio_out[5] = IO_P4_COL[0];
-  assign uio_out[6] = IO_P4_COL[1];
-  assign uio_out[7] = IO_P4_COL[2];
-  assign uio_out[8] = IO_P4_COL[3];
+  assign uio_out[4] = IO_P4_COL[0];
+  assign uio_out[5] = IO_P4_COL[1];
+  assign uio_out[6] = IO_P4_COL[2];
+  assign uio_out[7] = IO_P4_COL[3];
   
 
   // calculator_top inst_calculator(
