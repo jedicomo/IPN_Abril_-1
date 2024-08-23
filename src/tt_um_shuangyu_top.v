@@ -5,11 +5,11 @@
 
 `default_nettype none
 
-`include "keypad_poller.v"
+/*`include "keypad_poller.v"
 `include "keypad_encoder.v"
 `include "sign_display.v"
 `include "pre_display.v"
-`include "drive.v"
+`include "drive.v"*/
 
 
 module tt_um_shuangyu_top (
