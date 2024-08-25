@@ -19,7 +19,7 @@ module calculator(
 		if(!rst_n)
 			result <= 8'b0;
 		else
-		 	result <= a * b;
+		 	result <= a / b;
 	end
 
 endmodule
