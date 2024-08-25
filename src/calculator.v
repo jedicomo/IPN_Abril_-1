@@ -3,8 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+ /* verilator lint_off UNUSEDSIGNAL */
+
 `default_nettype none
-`timescale 1ns / 1ps
+//`timescale 1ns / 1ps
 
 /*
 calculator
@@ -232,3 +234,4 @@ end
 
 
 endmodule
+/* verilator lint_on UNUSEDSIGNAL */

@@ -4,7 +4,7 @@
  */
 
 `default_nettype none
-
+/* verilator lint_off UNUSEDSIGNAL */
 
 module tt_um_shuangyu_top (
     input  wire [7:0] ui_in,    // Dedicated inputs
@@ -37,3 +37,4 @@ module tt_um_shuangyu_top (
 
 
 endmodule
+/* verilator lint_on UNUSEDSIGNAL */
