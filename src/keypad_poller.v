@@ -84,6 +84,7 @@ begin
 					if (keypad_row_in != NO_KEY)
 					begin
 						state <= state_keypress_hold;
+						clk_counter <= 16'h0;
 						key_pressed <= 1'b1;
 					end else
 					begin
@@ -96,4 +97,5 @@ begin
 		endcase
 	end
 end
+
 endmodule
