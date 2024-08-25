@@ -28,7 +28,7 @@ module tt_um_shuangyu_top (
     assign uo_out[7:4] = 4'b0000;
 
     assign uio_oe = 8'b0;
-    assign uio_oe = 8'b0;
+    assign uio_out = 8'b0;
 
 
     keypad_encoder inst_keypad_encoder(
