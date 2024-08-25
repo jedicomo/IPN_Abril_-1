@@ -18,6 +18,7 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "tt_um_shuangyu_top.v"
+    - "keypad_poller.v"
     - "keypad_encoder.v"
    
 
@@ -28,10 +29,10 @@ pinout:
   ui[1]: "ROW_2"
   ui[2]: "ROW_3"
   ui[3]: "ROW_4"
-  ui[4]: "COL_1"
-  ui[5]: "COL_2"
-  ui[6]: "COL_3"
-  ui[7]: "COL_4"
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: ""
 
   # Outputs
   uo[0]: "key_A"
