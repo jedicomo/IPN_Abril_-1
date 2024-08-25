@@ -18,12 +18,8 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "tt_um_shuangyu_top.v"
-    - "calculator.v"
-    - "keypad_poller.v"
     - "keypad_encoder.v"
-    - "sign_display.v"
-    - "pre_display.v"
-    - "drive.v"
+   
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
@@ -32,30 +28,30 @@ pinout:
   ui[1]: "ROW_2"
   ui[2]: "ROW_3"
   ui[3]: "ROW_4"
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[4]: "COL_1"
+  ui[5]: "COL_2"
+  ui[6]: "COL_3"
+  ui[7]: "COL_4"
 
   # Outputs
-  uo[0]: "SevenSegment_A"
-  uo[1]: "SevenSegment_B"
-  uo[2]: "SevenSegment_C"
-  uo[3]: "SevenSegment_D"
-  uo[4]: "SevenSegment_E"
-  uo[5]: "SevenSegment_F"
-  uo[6]: "SevenSegment_G"
-  uo[7]: "SevenSegment_dp"
+  uo[0]: "key_A"
+  uo[1]: "key_B"
+  uo[2]: "key_C"
+  uo[3]: "key_D"
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: "Enable digit 1"
-  uio[1]: "Enable digit 2"
-  uio[2]: "Enable digit 3"
-  uio[3]: "Enable digit 4"
-  uio[4]: "COL_1"
-  uio[5]: "COL_2"
-  uio[6]: "COL_3"
-  uio[7]: "COL_4"
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
 
 # Do not change!
 yaml_version: 6
