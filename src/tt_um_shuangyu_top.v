@@ -18,41 +18,22 @@ module tt_um_shuangyu_top (
 );
 
 
-
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, ui_in[7:4], uio_in[7:0], 1'b0};
+    wire _unused = &{ena, ui_in[7:5], uio_in[7:0], 1'b0};
 
     // All output pins must be assigned. If not used, assign to 0.
-    wire [3:0] key;
-    assign uo_out[3:0] = key[3:0];
-    assign uo_out[7:4] = 4'b0000;
+    assign uio_oe = 8'b1111_1111;
+    assign uio_out[7:0] = display[15:8];
+    assign uo_out[7:0] = display[7:0];
+    wire [24:0] display;
 
-    assign uio_oe = 8'b0;
-    assign uio_out = 8'b0;
-
-    wire [3:0] IO_P4_COL;
-    wire [3:0] IO_P4_ROW;
-    wire press;
-
-    keypad_poller inst_keypad_poller(
+    calculator inst_calculator(
         .clk(clk),
         .rst_n(rst_n),
-        .keypad_row_in(ui_in[3:0]),
-        .keypad_col_out(IO_P4_COL),
-        .row_out(IO_P4_ROW),
-        .key_pressed(press)
+        .key_pressed(ui_in[4]),
+        .keypad_out(ui_in[3:0]),
+        .reg_display(display)
     );
-
-
-    keypad_encoder inst_keypad_encoder(
-        .clk(clk),
-        .rst_n(rst_n),
-        .rows(IO_P4_ROW),
-        .cols(IO_P4_COL),
-        .key(key)
-    );
-
-
 
 
 endmodule
