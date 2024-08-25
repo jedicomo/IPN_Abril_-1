@@ -31,7 +31,7 @@ module tt_um_shuangyu_top (
     assign uio_oe = 8'b0;
 
 
-    keypad_encoder(
+    keypad_encoder inst_keypad_encoder(
         .clk(clk),
         .rst_n(rst_n),
         .rows(ui_in[3:0]),
