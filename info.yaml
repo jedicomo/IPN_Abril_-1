@@ -18,7 +18,7 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "tt_um_shuangyu_top.v"
-    - "drive.v"
+    - "bin2bcd.v"
    
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
