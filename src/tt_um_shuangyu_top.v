@@ -19,23 +19,26 @@ module tt_um_shuangyu_top (
 
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, ui_in[7:4], uio_in[7:0], 1'b0};
+    wire _unused = &{ena, 1'b0};
 
     /* verilator lint_off UNUSED */
     // All output pins must be assigned. If not used, assign to 0.
-    assign uio_oe = 8'b1111_1111;
-    assign uio_out[7:0] = {IO_P4_COL, display[11:8]};
-    assign uo_out[7:0] = display[7:0];
-    wire [13:0] display;
-    wire [3:0] IO_P4_COL;
+    assign uio_oe = 8'b1111_0000;
+    
+    wire [2:0] Enable;
+    wire [7:0] SevenSegment;
+    assign uo_out[7:0] = SevenSegment;
+    assign uio_out[7:5] = Enable;
+    assign uio_out[4] = 1'b0;
     /* verilator lint_on UNUSED */
 
-    calculator inst_calculator(
+    drive inst_drive(
         .clk(clk),
         .rst_n(rst_n),
-        .IO_P4_ROW(ui_in[3:0]),
-        .IO_P4_COL(IO_P4_COL),
-        .reg_display(display)
+        .en(1'b1),
+        .bcd({uio_in[3:0], ui_in[7:0]}),
+        .Enable(Enable),
+        .SevenSegment(SevenSegment)
     );
 
 

@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = tt_um_shuangyu_top.v calculator.v keypad_poller.v keypad_encoder.v
+PROJECT_SOURCES = tt_um_shuangyu_top.v drive.v
 
 ifneq ($(GATES),yes)
 
