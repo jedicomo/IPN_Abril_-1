@@ -24,7 +24,7 @@ module tt_um_shuangyu_top (
     // All output pins must be assigned. If not used, assign to 0.
     assign uio_oe = 8'b1111_1111;
     assign uio_out[7:0] = {6'b0, display[9:8]};
-    assign uo_out[7:0] = result[7:0];
+    assign uo_out[7:0] = display[7:0];
     wire [9:0] display;
 
     calculator inst_calculator(
