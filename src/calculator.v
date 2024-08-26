@@ -18,8 +18,8 @@ module calculator(
 localparam [1:0]
 	OP_PLUS = 2'd0,
 	OP_MINUS = 2'd1,
-	OP_MULTIPLY = 2'd2;
-	// OP_DIVIDE = 2'd3;
+	OP_MULTIPLY = 2'd2,
+	OP_DIVIDE = 2'd3;
 
 
 //calculator state
@@ -31,11 +31,11 @@ localparam [3:0]
    state_plus_pressed = 4'd3,
    state_minus_pressed = 4'd4,
    state_multiply_pressed = 4'd5,
-   state_calculate = 4'd6,
-   state_display_arg = 4'd7,
-   state_display_result = 4'd8;
-   //state_dp_pressed = 4'd4,
-   //state_divide_pressed = 4'd7,
+   state_divide_pressed = 4'd6,
+   state_calculate = 4'd7,
+   state_dividing = 4'd8,
+   state_display_arg = 4'd9,
+   state_display_result = 4'd10;
 
 
 //calculator registers
@@ -54,6 +54,12 @@ reg key_pressed_prev;  //check if new key come in
 wire [3:0] keypad_out;
 wire [3:0] keypad_poller_row;
 wire [3:0] keypad_poller_column;
+reg divider_start;
+reg [9:0] numerator;
+reg [9:0] denominator;
+wire [9:0] quotient;
+//wire [9:0] remainder;
+wire divider_done;
 wire [11:0] bcd;
 
 keypad_poller inst_keypad_poller(
@@ -71,6 +77,17 @@ keypad_encoder inst_keypad_encoder(
     .rows(keypad_poller_row),
     .cols(keypad_poller_column),
     .key(keypad_out)
+);
+
+divider #(10) inst_divider (
+    .clk(clk), 
+    .rst_n(rst_n), 
+    .numerator(numerator), 
+    .denominator(denominator), 
+    .start(divider_start), 
+    .quotient(quotient), 
+    //.remainder(remainder), 
+    .done(divider_done)
 );
 
 bin2bcd inst_bin2bcd(
@@ -110,7 +127,7 @@ begin
 					if(key_pressed && !key_pressed_prev) begin
 						if(keypad_out < 4'hA) 
 							state <= state_digit_pressed;
-						else if(keypad_out == 4'hE) //clear
+						else if(keypad_out >= 4'hE) //clear
 							state <= state_clear;
 						else if(keypad_out == 4'hA) //plus
 							state <= state_plus_pressed;
@@ -118,8 +135,8 @@ begin
 							state <= state_minus_pressed;
 						else if(keypad_out == 4'hC) //multiply (B)
 							state <= state_multiply_pressed;
-						// else if(keypad_out == 4'hD) //divide (D)
-						// 	state <= state_divide_pressed;
+						else if(keypad_out == 4'hD) //divide (D)
+						 	state <= state_divide_pressed;
 					end
 					key_pressed_prev <= key_pressed;
 				end
@@ -149,11 +166,11 @@ begin
 					reg_operator_next <= OP_MULTIPLY;
 					state <= state_calculate;
 				end
-			// state_divide_pressed:
-			// 	begin
-			// 		reg_operator_next <= OP_DIVIDE;
-			// 		state <= state_calculate;
-				// end
+			state_divide_pressed:
+				begin
+					reg_operator_next <= OP_DIVIDE;
+					state <= state_calculate;
+				end
 			state_calculate:
 				begin
 					if(reg_operator == OP_PLUS) begin
@@ -168,24 +185,24 @@ begin
 						reg_result <= reg_result * reg_arg;
 						state <= state_display_result;
 					end 
-					//else begin //OP_DIVIDE
-					// 	divider_start <= 1'b1;
-					// 	numerator <= reg_result;
-					// 	denominator <= reg_arg;
-					// 	state <= state_dividing;
-					// end
+					else begin 
+						divider_start <= 1'b1;
+						numerator <= reg_result;
+						denominator <= reg_arg;
+						state <= state_dividing;
+					end
 					reg_operator <= reg_operator_next;
 					reg_arg <= 0;
 				end
-			// state_dividing:
-			// 	begin
-			// 		divider_start <= 1'b0;
-			// 		if(divider_done)
-			// 		begin
-			// 			reg_result <= quotient;
-			// 			state <= state_display_result;
-			// 		end
-			// 	end
+			state_dividing:
+				begin
+					divider_start <= 1'b0;
+					if(divider_done)
+					begin
+						reg_result <= quotient;
+						state <= state_display_result;
+					end
+				end
 			state_display_arg: 
 				begin
 					reg_display <= reg_arg;

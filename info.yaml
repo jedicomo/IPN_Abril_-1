@@ -19,6 +19,7 @@ project:
   source_files:
     - "tt_um_shuangyu_top.v"
     - "calculator.v"
+    - "divider.v"
     - "keypad_poller.v"
     - "keypad_encoder.v"
     - "bin2bcd.v"
