@@ -38,8 +38,8 @@ localparam [3:0]
 
 
 //calculator registers
-reg [9:0] reg_arg;
-reg [9:0] reg_result;
+reg [13:0] reg_arg;
+reg [13:0] reg_result;
 //reg [9:0] reg_display;
 reg [1:0] reg_operator;
 reg [1:0] reg_operator_next;
