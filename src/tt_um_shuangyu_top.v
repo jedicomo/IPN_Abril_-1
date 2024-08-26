@@ -19,21 +19,28 @@ module tt_um_shuangyu_top (
 
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, uio_in[7:2], 1'b0};
+    wire _unused = &{ena, ui_in[7:4], uio_in[7:0], 1'b0};
 
     /* verilator lint_off UNUSED */
     // All output pins must be assigned. If not used, assign to 0.
-    assign uio_oe = 8'b1111_1100;
-    
-    wire [11:0] bcd;
-    assign uo_out[7:0] = bcd[7:0];
-    assign uio_out[7:4] = bcd[11:8];
-    assign uio_out[3:0] = 4'b0;
+    assign uio_oe = 8'b1111_1111;
+    assign uio_out[0] = 1'b0;
+
+    wire [3:0] IO_P4_COL;
+    wire [2:0] Enable;
+    wire [7:0] SevenSegment;
+    assign uio_out[7:4] = IO_P4_COL;
+    assign uio_out[3:1] = Enable;
+    assign uo_out[7:0] = SevenSegment;
     /* verilator lint_on UNUSED */
 
-    bin2bcd inst_bin2bcd(
-        .bin_in({uio_in[1:0], ui_in[7:0]}),
-        .bcd_out(bcd)
+    calculator inst_calculator(
+        .clk(clk),
+        .rst_n(rst_n),
+        .IO_P4_ROW(ui_in[3:0]),
+        .IO_P4_COL(IO_P4_COL),
+        .Enable(Enable),
+        .SevenSegment(SevenSegment)
     );
 
 
