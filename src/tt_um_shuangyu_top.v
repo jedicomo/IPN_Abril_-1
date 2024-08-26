@@ -19,7 +19,7 @@ module tt_um_shuangyu_top (
 
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, 1'b0};
+    wire _unused = &{ena, uio_in[7:4], 1'b0};
 
     /* verilator lint_off UNUSED */
     // All output pins must be assigned. If not used, assign to 0.
@@ -29,7 +29,7 @@ module tt_um_shuangyu_top (
     wire [7:0] SevenSegment;
     assign uo_out[7:0] = SevenSegment;
     assign uio_out[7:5] = Enable;
-    assign uio_out[4] = 1'b0;
+    assign uio_out[4:0] = 5'b0;
     /* verilator lint_on UNUSED */
 
     drive inst_drive(
