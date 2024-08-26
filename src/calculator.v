@@ -8,8 +8,8 @@
 module calculator(
     input clk,
     input rst_n,
-	input key_pressed,
-	input [3:0] keypad_out,
+	input [3:0] IO_P4_ROW,
+    output reg [3:0] IO_P4_COL,
 	output reg [9:0] reg_display
 );
 
@@ -43,8 +43,34 @@ reg [9:0] reg_result;
 //reg [9:0] reg_display;
 reg [1:0] reg_operator;
 reg [1:0] reg_operator_next;
+
+wire key_pressed;
 reg key_pressed_prev;  //check if new key come in
 
+
+
+//component
+wire [3:0] keypad_out;
+wire [3:0] keypad_poller_row;
+wire [3:0] keypad_poller_column;
+
+keypad_poller inst_keypad_poller(
+    .clk(clk),
+    .rst_n(rst_n),
+    .keypad_row_in(IO_P4_ROW), 
+    .keypad_col_out(keypad_poller_column),
+    .row_out(keypad_poller_row),
+    .key_pressed(key_pressed)
+);
+
+keypad_encoder inst_keypad_encoder(
+    .clk(clk),
+    .rst_n(rst_n),
+    .rows(keypad_poller_row),
+    .cols(keypad_poller_column),
+    .key(keypad_out)
+);
+ 
 
 always @(posedge clk or negedge rst_n)
 begin
@@ -159,5 +185,7 @@ begin
 		endcase
 	end
 end
+
+assign IO_P4_COL = keypad_poller_column;
 
 endmodule
