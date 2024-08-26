@@ -10,7 +10,7 @@ module calculator(
     input rst_n,
 	input [3:0] IO_P4_ROW,
     output reg [3:0] IO_P4_COL,
-	output reg [9:0] reg_display
+	output reg [13:0] reg_display
 );
 
 
@@ -110,7 +110,7 @@ begin
 				begin
 					/* verilator lint_off WIDTHEXPAND */
 					//don't consume another keypress after hundreds
-					if(reg_arg < 10'd100) 
+					if(reg_arg < 10'd1000) 
 					begin
 						reg_arg <= reg_arg * 10 + keypad_out;
 					end

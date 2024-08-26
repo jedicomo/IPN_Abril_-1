@@ -52,8 +52,8 @@ pinout:
   uio[3]: "w"
   uio[4]: "t"
   uio[5]: "u"
-  uio[6]: ""
-  uio[7]: ""
+  uio[6]: "o"
+  uio[7]: "p"
 
 # Do not change!
 yaml_version: 6

@@ -21,12 +21,14 @@ module tt_um_shuangyu_top (
     // List all unused inputs to prevent warnings
     wire _unused = &{ena, ui_in[7:4], uio_in[7:0], 1'b0};
 
+    /* verilator lint_off UNUSED */
     // All output pins must be assigned. If not used, assign to 0.
     assign uio_oe = 8'b1111_1111;
-    assign uio_out[7:0] = {2'b0, IO_P4_COL, display[9:8]};
+    assign uio_out[7:0] = {IO_P4_COL, display[11:8]};
     assign uo_out[7:0] = display[7:0];
-    wire [9:0] display;
+    wire [13:0] display;
     wire [3:0] IO_P4_COL;
+    /* verilator lint_on UNUSED */
 
     calculator inst_calculator(
         .clk(clk),
