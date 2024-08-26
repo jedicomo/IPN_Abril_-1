@@ -19,21 +19,20 @@ module tt_um_shuangyu_top (
 
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, ui_in[7:4], uio_in[7:4], 1'b0};
+    wire _unused = &{ena, ui_in[7:5], uio_in[7:0], 1'b0};
 
     // All output pins must be assigned. If not used, assign to 0.
-    assign uio_oe = 8'b1111_0000;
-    assign uio_out[7:0] = 8'b0;
-
+    assign uio_oe = 8'b1111_1111;
+    assign uio_out[7:0] = {6'b0, display[9:8]};
     assign uo_out[7:0] = result[7:0];
-    wire [7:0] result;
+    wire [9:0] display;
 
     calculator inst_calculator(
         .clk(clk),
         .rst_n(rst_n),
-        .a(ui_in[3:0]),
-        .b(uio_in[3:0]),
-        .result(result)
+        .key_pressed(ui_in[4]),
+        .keypad_out(ui_in[3:0]),
+        .reg_display(display)
     );
 
 
