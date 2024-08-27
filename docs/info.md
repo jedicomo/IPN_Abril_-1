@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-the calculator can support operation addition, subtraction, multiplication and division on both integer and fraction number. 
+the calculator can support addition, subtraction, multiplication and division on positive integer number. 
 
 ## How to test
 
@@ -17,4 +17,4 @@ The project can be tested by entern input through the keypad and then check whet
 
 ## External hardware
 
-The calculator need a 4x4 matrix keypad for input and a 4-digit seven segment display to show the calculated result.
+The calculator need a 4x4 matrix keypad for input and a 3-digit seven segment display to show the calculated result.
