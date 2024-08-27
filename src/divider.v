@@ -1,4 +1,3 @@
-//https://en.wikipedia.org/wiki/Division_algorithm#Division_by_repeated_subtraction
 /*
 this algorithm finds a remainder
 while N = D do

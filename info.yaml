@@ -5,7 +5,7 @@ project:
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "A calculator do basic calculation"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     10000000       # Clock frequency in Hz (or 0 if not applicable) 10Mhz
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -29,34 +29,34 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: "r1"
-  ui[1]: "r2"
-  ui[2]: "r3"
-  ui[3]: "r4"
+  ui[0]: "ROW_1"
+  ui[1]: "ROW_2"
+  ui[2]: "ROW_3"
+  ui[3]: "ROW_4"
   ui[4]: ""
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: "key"
-  uo[1]: "key_B"
-  uo[2]: "key_C"
-  uo[3]: "key_D"
-  uo[4]: "a"
-  uo[5]: "b"
-  uo[6]: "c"
-  uo[7]: "d"
+  uo[0]: "sseg_A"
+  uo[1]: "sseg_B"
+  uo[2]: "sseg_C"
+  uo[3]: "sseg_D"
+  uo[4]: "sseg_E"
+  uo[5]: "sseg_F"
+  uo[6]: "sseg_G"
+  uo[7]: "sseg_dp"
 
   # Bidirectional pins
-  uio[0]: "b1"
-  uio[1]: "b2"
-  uio[2]: "q"
-  uio[3]: "w"
-  uio[4]: "t"
-  uio[5]: "u"
-  uio[6]: "o"
-  uio[7]: "p"
+  uio[0]: "0"
+  uio[1]: "E_1"
+  uio[2]: "E_2"
+  uio[3]: "E_3"
+  uio[4]: "COL_1"
+  uio[5]: "COL_2"
+  uio[6]: "COL_3"
+  uio[7]: "COL_4"
 
 # Do not change!
 yaml_version: 6

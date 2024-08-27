@@ -19,12 +19,12 @@ localparam [2:0]
 	state_keypress_hold  = 3'd4,
 	state_check_row2  = 3'd5;
 	
-reg [15:0] clk_counter;
-localparam [15:0] 
+reg [16:0] clk_counter;
+localparam [16:0] 
 	// ignore the unstable transition stage
-	ticks_debounce = 16'd20,   // tbd 
+	ticks_debounce = 17'd10_0000,   //10ms clk:10Mhz 
 	// hold key press state
-	ticks_hold = 16'd4;         // tbd
+	ticks_hold = 17'd2_0000;         //2ms
 	
 localparam [3:0] NO_KEY = 4'b0000;  //none of the four rows receive => no key press
 	
@@ -53,8 +53,8 @@ begin
 				begin
                     // rotate column (0001, 0010, 0100, 1000)
 					keypad_col_out <= { keypad_col_out[2:0], keypad_col_out[3] };  
-					clk_counter <= 16'h0;
 					state <= state_wait_debounce;
+					clk_counter <= 17'h0;
 				end
 			state_wait_debounce:
 				begin
@@ -70,7 +70,7 @@ begin
 				else begin  
 					row_out <= keypad_row_in;
 					state <= state_keypress_hold;  
-					clk_counter <= 16'h0;
+					clk_counter <= 17'h0;
 				end
 			state_keypress_hold:
 				begin
@@ -84,7 +84,7 @@ begin
 					if (keypad_row_in != NO_KEY)
 					begin
 						state <= state_keypress_hold;
-						clk_counter <= 16'h0;
+						clk_counter <= 17'h0;
 						key_pressed <= 1'b1;
 					end else
 					begin

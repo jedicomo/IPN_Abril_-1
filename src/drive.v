@@ -11,20 +11,20 @@ module drive(
 
 
 
-/*count 20 clk cycle，output a flag*/
-reg [12:0] cnt0;
+/*count 1_0000 clk cycle (1ms)，output a flag*/
+reg [13:0] cnt0;
 reg flag; 
 always @ (posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        cnt0 <= 13'b0;
+        cnt0 <= 14'b0;
         flag <= 1'b0;
     end
-    else if (cnt0 < 13'd20 - 1'b1) begin
+    else if (cnt0 < 14'd1_0000 - 1'b1) begin
         cnt0 <= cnt0 + 1'b1;
         flag <= 1'b0;
     end
     else begin
-        cnt0 <= 13'b0;
+        cnt0 <= 14'b0;
         flag <= 1'b1;
     end
 end
